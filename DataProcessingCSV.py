@@ -40,4 +40,4 @@ def read_csv(path):
             result.append(item_dict)
     return result
 
-print(read_csv('./climate.txt'))
+print(read_csv('E:\\JOB\\Power-BI-Training-Session-main\\Power-BI-Training-Session-main\\Day 1\\Telco-Customer-Churn.csv'))
