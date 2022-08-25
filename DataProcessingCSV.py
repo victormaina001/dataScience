@@ -1,5 +1,5 @@
 from asyncore import read
-
+import numpy as np
 
 def parse_headers(header_line):
     return header_line.strip().split(',')
