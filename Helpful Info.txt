@@ -1,0 +1,21 @@
+The `open` function also accepts a `mode` argument to specifies how we can interact with the file. The following options are supported:
+
+```
+    ========= ===============================================================
+    Character Meaning
+    --------- ---------------------------------------------------------------
+    'r'       open for reading (default)
+    'w'       open for writing, truncating the file first
+    'x'       create a new file and open it for writing
+    'a'       open for writing, appending to the end of the file if it exists
+    'b'       binary mode
+    't'       text mode (default)
+    '+'       open a disk file for updating (reading and writing)
+    'U'       universal newline mode (deprecated)
+    ========= ===============================================================
+```
+
+To view the contents of the file, we can use the `read` method of the file object.
+
+open file function takes in a path and mode 
+example: file_1=open("E:data.txt", mode='r')

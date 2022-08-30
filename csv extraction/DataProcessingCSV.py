@@ -40,4 +40,50 @@ def read_csv(path):
             result.append(item_dict)
     return result
 
-print(read_csv('E:\\JOB\\Power-BI-Training-Session-main\\Power-BI-Training-Session-main\\Day 1\\Telco-Customer-Churn.csv'))
+dict_variable=(read_csv('E:\\JOB\\Power-BI-Training-Session-main\\Power-BI-Training-Session-main\\Day 1\\Telco-Customer-Churn.csv'))
+
+
+
+#calculating total monthly installement for a loan
+import math
+
+def loan_emi(amount, duration, rate, down_payment=0):
+    """Calculates the equal montly installment (EMI) for a loan.
+    
+    Arguments:
+        amount - Total amount to be spent (loan + down payment)
+        duration - Duration of the loan (in months)
+        rate - Rate of interest (monthly)
+        down_payment (optional) - Optional intial payment (deducted from amount)
+    """
+    loan_amount = amount - down_payment
+    try:
+        emi = loan_amount * rate * ((1+rate)**duration) / (((1+rate)**duration)-1)
+    except ZeroDivisionError:
+        emi = loan_amount / duration
+    emi = math.ceil(emi)
+    return emi
+
+#example 
+loans2 = read_csv('./data/loans2.txt')
+loans2
+def compute_emis(loans):
+    for loan in loans:
+        loan['emi'] = loan_emi(
+            loan['amount'], 
+            loan['duration'], 
+            loan['rate']/12, # the CSV contains yearly rates
+            loan['down_payment'])
+
+compute_emis(loans2)
+
+#writing the calculated emis' alongside loans into a file 
+with open('./data/emis2.txt', 'w') as f:
+    for loan in loans2:
+        f.write('{},{},{},{},{}\n'.format(
+            loan['amount'], 
+            loan['duration'], 
+            loan['rate'], 
+            loan['down_payment'], 
+            loan['emi']))
+        

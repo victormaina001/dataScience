@@ -9,7 +9,7 @@ print(climate_data)
 print(climate_data.shape)
 weights = np.array([0.3, 0.2, 0.5])
 yields = climate_data @ weights
-print(yields)
+print(yields) 
 print(yields.shape)
 #concatenates the yields and climate_data matrices to form one matric climate_results
 climate_results = np.concatenate((climate_data, yields.reshape(10000, 1)), axis=1)
@@ -23,4 +23,24 @@ np.savetxt('climate_results.txt',
            fmt='%.2f', 
            delimiter=',',
            header='temperature,rainfall,humidity,yeild_apples', 
-           comments='')
+           comments='') 
+
+#calculating total monthly installement for a loan
+import math
+
+def loan_emi(amount, duration, rate, down_payment=0):
+    """Calculates the equal montly installment (EMI) for a loan.
+    
+    Arguments:
+        amount - Total amount to be spent (loan + down payment)
+        duration - Duration of the loan (in months)
+        rate - Rate of interest (monthly)
+        down_payment (optional) - Optional intial payment (deducted from amount)
+    """
+    loan_amount = amount - down_payment
+    try:
+        emi = loan_amount * rate * ((1+rate)**duration) / (((1+rate)**duration)-1)
+    except ZeroDivisionError:
+        emi = loan_amount / duration
+    emi = math.ceil(emi)
+    return emi
