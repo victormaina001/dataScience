@@ -1,5 +1,8 @@
 from asyncore import read
+import os
 import numpy as np
+
+
 
 def parse_headers(header_line):
     return header_line.strip().split(',')
@@ -86,4 +89,36 @@ with open('./data/emis2.txt', 'w') as f:
             loan['rate'], 
             loan['down_payment'], 
             loan['emi']))
+        
+#confirm file has been created 
+os.listdir('data')
+#reads the content of the file
+with open('./data/emis2.txt', 'r') as f:
+    print(f.read())
+
+#generic function `write_csv` which takes a list of dictionaries and writes it to a file in CSV format
+
+def write_csv(items, path):
+    # Open the file in write mode
+    with open(path, 'w') as f:
+        # Return if there's nothing to write
+        if len(items) == 0:
+            return
+        
+        # Write the headers in the first line
+        headers = list(items[0].keys())
+        f.write(','.join(headers) + '\n')
+        
+        # Write one item per line
+        for item in items:
+            values = []
+            for header in headers:
+                values.append(str(item.get(header, "")))
+            f.write(','.join(values) + "\n")
+# With just four lines of code, we can now read each downloaded file, calculate the EMIs, and write the results back to new files
+for i in range(1,4):
+    loans = read_csv('./data/loans{}.txt'.format(i))
+    compute_emis(loans)
+    write_csv(loans, './data/emis{}.txt'.format(i))
+
         
