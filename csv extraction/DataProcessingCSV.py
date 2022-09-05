@@ -121,4 +121,34 @@ for i in range(1,4):
     compute_emis(loans)
     write_csv(loans, './data/emis{}.txt'.format(i))
 
-        
+#converting a data frame into json 
+ from io import StringIO
+    import json
+    import pandas as pd
+    import DataFrame
+
+    buff=StringIO()
+    #df is your DataFrame
+    df.to_json(path_or_buf=buff,orient='records')
+    dfJson=json.loads(buff)
+    
+
+#converting Json to csv
+#1)if you have a json file
+
+df.read_json(r' path to file\ file_name.json')
+
+df.to_csv(r 'path to save\ file_name.json',index=None)
+
+#option2 if you have a dictionary named myDict
+
+df=pd.Dataframe([myDict])
+
+df.to_csv(r 'path to save\ file_name.json',index=None)
+
+#converting dataframe to json
+
+df.to_json('filname.json', orient='records' lines=True) 
+
+converting dataframe into excel 
+df.to_excel(file_name.xlsx)
