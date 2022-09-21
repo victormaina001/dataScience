@@ -144,7 +144,7 @@ df.to_csv(r 'path to save\ file_name.json',index=None)
 
 df=pd.Dataframe([myDict])
 
-df.to_csv(r 'path to save\ file_name.json',index=None)
+df.to_csv(r 'path to save\ file_name.csv',index=None)
 
 #converting dataframe to json
 
